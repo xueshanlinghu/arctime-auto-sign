@@ -1,29 +1,38 @@
 # arctime账户每日签到赚取积分
 
+# 整个工作流的名称
 name: 'Arctime Auto Sign'
 
 on:
+  # 在推送到master分支时会自动运行一次
   push:
     branches: 
       - master
+  # 可以设定定时任务执行
   schedule:
-    # UTC1点30定期执行一次，及北京时间9点30
+    # UTC1点30定期执行一次，即北京时间9点30
     - cron: '30 1 * * *'
 
 jobs:
-     
+  # arctime_auto_sign为job_id，后续如果有多个job可以引用  
   arctime_auto_sign:
-
+    
+    # 指定运行在哪台机器上
     runs-on: ubuntu-latest
 
+    # 该job的操作步骤
     steps:
+    # 将本仓库的代码拉取一份到虚拟环境机器上
     - name: Checkout
       uses: actions/checkout@v2
+    # 配置安装python环境
     - name: 'Set up Python'
       uses: actions/setup-python@v2
       with:
         python-version: 3.8.2
+    # 配置安装依赖包
     - name: 'Install requirements'
       run: pip install -r requirements.txt
+    # 运行python脚本文件，其中的参数取secrets中配置的加密参数，账户名和密码
     - name: 'Working'
       run: python arctime_auto_sign.py ${{ secrets.USERNAME }} ${{ secrets.PASSWORD }}
