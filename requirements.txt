@@ -13,3 +13,4 @@ toml==0.10.1
 typed-ast==1.4.1
 urllib3==1.25.9
 wrapt==1.12.1
+wheel==0.34.2
