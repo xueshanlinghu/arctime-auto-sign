@@ -13,6 +13,7 @@ Arctime账户每天签到可以获得20积分（1元=100积分，即每日可以
 import requests
 import sys
 import logging
+import datetime
 
 init_login_url = "http://m.arctime.cn/home/user/login.html"
 login_url = "http://m.arctime.cn/home/user/login_save.html"
@@ -103,11 +104,18 @@ def auto_sign():
     else:
         log_print("访问用户个人中心页面失败")
 
+# 在容器里运行时时间为UTC时间，不是北京时间，需要进行调整
+def beijing(sec, what):
+    beijing_time = datetime.datetime.now() + datetime.timedelta(hours=8)
+    return beijing_time.timetuple()
+
 def log_setting():
     """配置日志设置"""
     LOG_FILE_NAME = "log.log"
     LOG_PATH = LOG_FILE_NAME
     log_level = logging.INFO
+    # 在容器里运行时时间为UTC时间，不是北京时间，需要进行调整
+    logging.Formatter.converter = beijing
     logging.basicConfig(level=log_level,
                         format='[%(asctime)s] - [line:%(lineno)d] - %(levelname)s: %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S',
