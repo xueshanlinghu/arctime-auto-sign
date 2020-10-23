@@ -56,7 +56,15 @@ python arctime_auto_sign.py 13000000000 pass123456
 
 2. 点击Settings → Secrets，创建五个Secrets。（别担心，放进去并保存后连你自己都无法再看到明文，只允许更新或删除，不会公开的）必须要设置哦，否则脚本会运行失败！如图所示：
 
-   ![image-20201021112545040](assets/image-20201021112545040.png)
+   ![image-20201023161159757](assets/image-20201023161159757.png)
+
+   它们分别为：
+
+   * USERNAME                           arctime用户名
+   * PASSWORD                           arctime密码
+   * MAIL_USERNAME                 qq邮箱号
+   * MAIL_PASSWORD                 qq邮箱授权码（不懂怎么获取的可以问我）
+   * MAIL_TO                                 收件邮箱
 
 3. 点击Actions，当项目Fork之后，为了避免风险，项目都会自动关闭Actions的开启，所以我们需要手动开始，点击按钮`I understand my workflows, go ahead and enable them`即可启用定义好的执行代码。到点了会自动进行执行。如图所示：
 
@@ -83,6 +91,12 @@ python arctime_auto_sign.py 13000000000 pass123456
 
 
 ### 更新日志
+
+v1.1 20201023：
+
+1. 添加发送日志邮件的功能
+
+
 
 v1.0 20201021：
 
