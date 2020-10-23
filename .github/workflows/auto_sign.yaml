@@ -39,7 +39,7 @@ jobs:
     # 发送日志邮件
     - name: send log mail
       uses: dawidd6/action-send-mail@v2.2.2
-      if: ${{ secrets.MAIL_USERNAME }} != ''
+      if: secrets.MAIL_USERNAME != ''
       with:
         server_address: smtp.qq.com
         server_port: 465
