@@ -40,8 +40,8 @@ jobs:
     - name: send log mail
       uses: dawidd6/action-send-mail@v2.2.2
       with:
-        serveraddress: smtp.qq.com
-        serverport: 465
+        server_address: smtp.qq.com
+        server_port: 465
         username: ${{ secrets.MAIL_USERNAME }}
         password: ${{ secrets.MAIL_PASSWORD }}
         subject: arctime签到情况
