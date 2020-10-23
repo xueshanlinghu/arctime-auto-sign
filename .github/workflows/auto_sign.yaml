@@ -26,13 +26,26 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     # 配置安装python环境
-    - name: 'Set up Python'
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: 3.8.2
     # 配置安装依赖包
-    - name: 'Install requirements'
+    - name: Install requirements
       run: pip install -r requirements.txt
     # 运行python脚本文件，其中的参数取secrets中配置的加密参数，账户名和密码
-    - name: 'Working'
+    - name: Working
       run: python arctime_auto_sign.py ${{ secrets.USERNAME }} ${{ secrets.PASSWORD }}
+    # 发送日志邮件
+    - name: send log mail
+      uses: dawidd6/action-send-mail@v2.2.2
+      with:
+        serveraddress: smtp.qq.com
+        serverport: 465
+        username: ${{ secrets.MAIL_USERNAME }}
+        password: ${{ secrets.MAIL_PASSWORD }}
+        subject: arctime签到情况
+        body: file://log.log
+        to: ${{ secrets.MAIL_TO }}
+        from: GitHub Actions
+        content_type: text/plain

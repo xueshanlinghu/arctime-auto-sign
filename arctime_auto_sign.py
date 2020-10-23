@@ -12,6 +12,7 @@ Arctime账户每天签到可以获得20积分（1元=100积分，即每日可以
 
 import requests
 import sys
+import logging
 
 init_login_url = "http://m.arctime.cn/home/user/login.html"
 login_url = "http://m.arctime.cn/home/user/login_save.html"
@@ -30,8 +31,8 @@ def init_login():
     res = requests.get(init_login_url, headers=headers)
     if res.status_code == 200:
         res.encoding = 'utf-8'
-        print("获取cookies成功")
-        print(res.cookies)
+        log_print("获取cookies成功")
+        log_print(res.cookies)
         return res.cookies
     else:
         return None
@@ -52,7 +53,7 @@ def login():
         res.encoding = "utf-8"
         content = res.json()
         if content.get("msg") == "登录成功":
-            print("登录成功！")
+            log_print("登录成功！")
             return True
         else:
             return False
@@ -79,7 +80,7 @@ def auto_sign():
         content = res.text
         # 获取现有积分
         points = getmidstring(content, "共获得", "积分")
-        print("您目前拥有的积分为：%s" % points)
+        log_print("您目前拥有的积分为：%s" % points)
         if content.find("立即签到领取积分") > -1:
             headers = {
                 'Host': 'm.arctime.cn',
@@ -94,15 +95,55 @@ def auto_sign():
             if res.status_code == 200:
                 res.encoding = "utf-8"
                 content = res.json()
-                print(content.get("msg"))
+                log_print(content.get("msg"))
         elif content.find("今日已经签到") > -1:
-            print("您今天已经签到过了")
+            log_print("您今天已经签到过了")
         else:
-            print("未知报错，请检查程序或联系作者！")
+            log_print("未知报错，请检查程序或联系作者！")
     else:
-        print("访问用户个人中心页面失败")
+        log_print("访问用户个人中心页面失败")
 
+def log_setting():
+    """配置日志设置"""
+    LOG_FILE_NAME = "log.log"
+    LOG_PATH = LOG_FILE_NAME
+    log_level = logging.INFO
+    logging.basicConfig(level=log_level,
+                        format='[%(asctime)s] - [line:%(lineno)d] - %(levelname)s: %(message)s',
+                        datefmt='%Y-%m-%d %H:%M:%S',
+                        filename=LOG_PATH,
+                        filemode='a')
+    logger = logging.getLogger(__name__)
+    logger.setLevel(log_level)
+    return logger
+
+def log_print(msg, level="info", to_log_file=True, to_console=True):
+    """
+    日志输出封装功能
+    :param msg: 要输出的信息
+    :param level: 日志级别，一般有debug, info, warning, error, critical等
+    :param to_log_file: 是否保存到日志文件中
+    :param to_console: 是否在控制台输出
+    """
+    if to_log_file:
+        if level == 'debug':
+            logger.debug(msg)
+        elif level == 'info':
+            logger.info(msg)
+        elif level == 'warning':
+            logger.warning(msg)
+        elif level == 'error':
+            logger.error(msg)
+        elif level == 'critical':
+            logger.critical(msg)
+    if to_console:
+        print(msg)
+
+   
 if __name__ == '__main__':
+    # 日志配置
+    logger = log_setting()
+
     if len(sys.argv) != 3:
         raise Exception("传入参数不正确，第一个传入参数为登入的账号，第二个传入账户为密码")
 
@@ -118,6 +159,6 @@ if __name__ == '__main__':
             # 检测并自动签到
             auto_sign()
         else:
-            print("登录失败！")
+            log_print("登录失败！")
     else:
-        print("初始化失败！")
+        log_print("初始化失败！")
