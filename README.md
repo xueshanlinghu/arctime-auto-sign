@@ -16,8 +16,6 @@ Github：[https://github.com/xueshanlinghu/xjobs](https://github.com/xueshanling
 
 最近研究的时候发现Github有Github Actions功能，它可以提供一系列的链式方式执行线上自动化持续部署（CI/CD），还能支持定时任务，于是我就研究了一下各类文档，将本项目改造成一个依托于Github Actions功能的自动化每日定时任务项目，这样连服务器都省啦，而且也有日志方便查询。
 
-后续可能还会考虑增加日志通知到邮箱或者短信、微信等的功能。
-
 那么如果你也想拥有这样的自动化功能，要怎么复用呢？
 
 
@@ -56,7 +54,7 @@ python arctime_auto_sign.py 13000000000 pass123456
 
 1. Fork本项目到你自己的仓库库。
 
-2. 点击Settings → Secrets，创建两个Secrets，一个叫做`USERNAME`，即用户名，一个叫做`PASSWORD`，即密码。（别担心，放进去并保存后连你自己都无法再看到明文，只允许更新或删除，不会公开的）必须要设置哦，否则脚本会运行失败！如图所示：
+2. 点击Settings → Secrets，创建五个Secrets。（别担心，放进去并保存后连你自己都无法再看到明文，只允许更新或删除，不会公开的）必须要设置哦，否则脚本会运行失败！如图所示：
 
    ![image-20201021112545040](assets/image-20201021112545040.png)
 
