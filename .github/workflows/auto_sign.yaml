@@ -11,7 +11,7 @@ on:
   # 可以设定定时任务执行
   schedule:
     # UTC1点08定期执行一次，相差8小时22分，即北京时间9点30
-    - cron: '30 9 * * *'
+    - cron: '8 1 * * *'
 
 jobs:
   # arctime_auto_sign为job_id，后续如果有多个job可以引用  
