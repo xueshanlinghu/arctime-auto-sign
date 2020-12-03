@@ -87,9 +87,9 @@ python arctime_auto_sign.py 13000000000 pass123456
 
 本项目完全开源，大家可以各取所需。
 
-如果你有自己的**想法**、**建议**、**bug问题**等，欢迎在 Gitee 或者 Github 提`Issue`。
+如果你有自己的**想法**、**建议**、**bug 问题**等，欢迎在 Gitee 或者 Github 提`Issue`。
 
-如有其它代码贡献，欢迎提`Pull requests`。
+如有其它代码贡献，欢迎提 `Pull requests`。
 
 Gitee 推出了类似的服务 Gitee Go，但目前仅提供给企业用户内测使用。添加执行时间似乎还要交钱，所以还是先用着 Github 的免费服务吧。
 
