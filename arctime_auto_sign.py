@@ -1,13 +1,13 @@
 # coding:utf-8
 
 '''
-Arctime账户自动签到
+Arctime 账户自动签到
 作者：雪山凌狐
 日期：2020-05-11
 版本号：1.0
 网址：http://www.xueshanlinghu.com
 
-Arctime账户每天签到可以获得20积分（1元=100积分，即每日可以得0.2元。可以用于购买增值服务等），我们来写个自动化脚本吧！
+Arctime 账户每天签到可以获得 20 积分（1 元 = 100 积分，即每日可以得 0.2 元。可以用于购买增值服务等），我们来写个自动化脚本吧！
 '''
 
 import requests
@@ -32,7 +32,7 @@ def init_login():
     res = requests.get(init_login_url, headers=headers)
     if res.status_code == 200:
         res.encoding = 'utf-8'
-        log_print("获取cookies成功")
+        log_print("获取 cookies 成功")
         log_print(res.cookies)
         return res.cookies
     else:
@@ -104,7 +104,7 @@ def auto_sign():
     else:
         log_print("访问用户个人中心页面失败")
 
-# 在容器里运行时时间为UTC时间，不是北京时间，需要进行调整
+# 在容器里运行时时间为 UTC 时间，不是北京时间，需要进行调整
 def beijing(sec, what):
     beijing_time = datetime.datetime.now() + datetime.timedelta(hours=8)
     return beijing_time.timetuple()
@@ -114,7 +114,7 @@ def log_setting():
     LOG_FILE_NAME = "log.log"
     LOG_PATH = LOG_FILE_NAME
     log_level = logging.INFO
-    # 在容器里运行时时间为UTC时间，不是北京时间，需要进行调整
+    # 在容器里运行时时间为 UTC 时间，不是北京时间，需要进行调整
     logging.Formatter.converter = beijing
     logging.basicConfig(level=log_level,
                         format='[%(asctime)s] - [line:%(lineno)d] - %(levelname)s: %(message)s',
@@ -129,7 +129,7 @@ def log_print(msg, level="info", to_log_file=True, to_console=True):
     """
     日志输出封装功能
     :param msg: 要输出的信息
-    :param level: 日志级别，一般有debug, info, warning, error, critical等
+    :param level: 日志级别，一般有 debug, info, warning, error, critical 等
     :param to_log_file: 是否保存到日志文件中
     :param to_console: 是否在控制台输出
     """
@@ -158,7 +158,7 @@ if __name__ == '__main__':
     username = sys.argv[1]
     password = sys.argv[2]
 
-    # 初始化登录，获取cookies
+    # 初始化登录，获取 cookies
     cookies = init_login()
     if cookies:
         # 登录
